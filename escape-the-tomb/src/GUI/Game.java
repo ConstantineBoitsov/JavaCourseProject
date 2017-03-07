@@ -33,6 +33,8 @@ public class Game extends Canvas implements Runnable {
 
     private int x = 0;
     private int y = 0;
+    private int mobX = 450;
+    private int mobY = 300;
     private Player hero = new Player(x,y,image);
     private Player mob = new Player(mobX,mobY,image)
 
@@ -53,17 +55,17 @@ public class Game extends Canvas implements Runnable {
     public void update(){
         if (leftPressed && playfield.ifPossibleToMove(x-50,y)) {
             hero.moveX(x-50);
-            if ((x<mobX && y<mobY && (mobX-x)>(mobY-y)) || (x>mobX && mobY=y) || (x>mobX && y<mobY && (x-mobX)>(mobY-y))) {
-                mob.moveX(-50);
+            if ((x<mobX && y<mobY && (mobX-x)>(mobY-y)) || (x<mobX && mobY==y) || (x<mobX && y>mobY && (mobX-x)>(y-mobY))) {
+                mob.moveX(mobX-50);
             }
-            if ((x<mobX && y>mobY && (mobX-x)>(y-mobY)) || (x=mobX && y>mobY) || (x>mobX && y<mobY && (x-mobX)>(y-mobY))) {
-                mob.moveX(+50);
+            if ((x>mobX && y<mobY && (x-mobX)>(mobY-y)) || (x>mobX && y==mobY) || (x>mobX && y>mobY && (x-mobX)>(y-mobY))) {
+                mob.moveX(mobX+50);
             }
-            if ((x<mobX && y<mobY && (mobX-x)<(mobY-y)) || (x=mobX && mobY>y) || (x>mobX && y<mobY && (x-mobX)<(mobY-y))) {
-                mob.moveX(-50);
+            if ((x<mobX && y<mobY && (mobX-x)<(mobY-y)) || (x==mobX && mobY>y) || (x>mobX && y<mobY && (x-mobX)<(mobY-y))) {
+                mob.moveY(mobY-50);
             }
-            if ((x<mobX && y<mobY && (mobX-x)>(mobY-y)) || (x=mobX && mobY>y) || (x>mobX && y<mobY && (x-mobX)>(mobY-y))) {
-                mob.moveX(-50);
+            if ((x<mobX && y>mobY && (mobX-x)>(y-mobY)) || (x==mobX && mobY<y) || (x>mobX && y>mobY && (x-mobX)<(y-mobY))) {
+                mob.moveY(mobY+50);
             }
         }
         if (rightPressed && playfield.ifPossibleToMove(x+50,y)) {
@@ -111,20 +113,20 @@ public class Game extends Canvas implements Runnable {
 
 
 
-    public Player getSprite(String path) {
-        BufferedImage sourceImage = null;
-
-        try {
-            URL url = this.getClass().getClassLoader().getResource(path);
-            sourceImage = ImageIO.read(url);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Player sprite = new Player(Toolkit.getDefaultToolkit().createImage(sourceImage.getSource()));
-
-        return sprite;
-    }
+//    public Player getSprite(String path) {
+//        BufferedImage sourceImage = null;
+//
+//        try {
+//            URL url = this.getClass().getClassLoader().getResource(path);
+//            sourceImage = ImageIO.read(url);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Player sprite = new Player(Toolkit.getDefaultToolkit().createImage(sourceImage.getSource()));
+//
+//        return sprite;
+//    }
 
     public static void main(String[] args) {
         Game game = new Game();
