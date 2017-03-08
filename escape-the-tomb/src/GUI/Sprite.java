@@ -1,27 +1,61 @@
-//package GUI;
-//
-//import java.awt.Graphics;
-//import java.awt.Image;
-//
-///**
-// * Created by Константин on 05.03.2017.
-// */
-//public class Sprite {
-//    private Image image;
-//
-//    public Sprite(Image image) {
-//        this.image = image;
-//    }
-//
-//    public int getWidth() {
-//        return image.getWidth(null);
-//    }
-//
-//    public int getHeight() {
-//        return image.getHeight(null);
-//    }
-//
-//    public void draw(Graphics g,int x,int y) {
-//        g.drawImage(image,x,y,null);
-//    }
-//}
+package GUI;
+
+import javax.swing.*;
+import java.awt.*;
+
+/**
+ * Created by Константин on 05.03.2017.
+ */
+
+public class Sprite {
+
+    protected int x;
+    protected int y;
+    protected int width;
+    protected int height;
+    protected boolean vis;
+    protected Image image;
+
+    public Sprite(int x, int y) {
+
+        this.x = x;
+        this.y = y;
+        vis = true;
+    }
+
+    protected void getImageDimensions() {
+
+        width = image.getWidth(null);
+        height = image.getHeight(null);
+    }
+
+    protected void loadImage(String imageName) {
+
+        ImageIcon ii = new ImageIcon(imageName);
+        image = ii.getImage();
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public boolean isVisible() {
+        return vis;
+    }
+
+    public void setVisible(Boolean visible) {
+        vis = visible;
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
+    }
+}
