@@ -32,10 +32,10 @@ public class Game extends JPanel implements Runnable {
     public boolean running;
 
 
-    private int x = 0;
-    private int y = 0;
-    private int mobX = 450;
-    private int mobY = 100;
+    private int x = 300;
+    private int y = 450;
+    private int mobX = 300;
+    private int mobY = 0;
 
     ImageIcon ii = new ImageIcon("assets/hero.png");
     private Image image = ii.getImage();
@@ -126,8 +126,7 @@ public class Game extends JPanel implements Runnable {
     Graphics g;
     public void start(){
         running = true;
-//        drawDoor(g);
-//        playfield.drawBoard(g);
+
         new Thread(this).start();
     }
 
