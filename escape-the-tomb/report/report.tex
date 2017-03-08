@@ -1,23 +1,95 @@
-\include{settings}
+\documentclass[a4paper]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{here}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{caption}
 
+\lstset{ %
+extendedchars=\true,
+keepspaces=true,
+language=Java,					% choose the language of the code
+basicstyle=\footnotesize,		% the size of the fonts that are used for the code
+numbers=left,					% where to put the line-numbers
+numberstyle=\footnotesize,		% the size of the fonts that are used for the line-numbers
+stepnumber=1,					% the step between two line-numbers. If it is 1 each line will be numbered
+numbersep=5pt,					% how far the line-numbers are from the code
+backgroundcolor=\color{white},	% choose the background color. You must add \usepackage{color}
+showspaces=false				% show spaces adding particular underscores
+showstringspaces=false,			% underline spaces within strings
+showtabs=false,					% show tabs within strings adding particular underscores
+frame=single,           		% adds a frame around the code
+tabsize=4,						% sets default tabsize to 2 spaces
+captionpos=b,					% sets the caption-position to bottom
+breaklines=true,				% sets automatic line breaking
+breakatwhitespace=false,		% sets if automatic breaks should only happen at whitespace
+escapeinside={\%*}{*)},			% if you want to add a comment within your code
+postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}
+}
 \begin{document}	% начало документа
 
-\include{titlepage}
+
+\begin{titlepage}	% начало титульной страницы
+
+	\begin{center}		% выравнивание по центру
+
+		\large Санкт-Петербургский Политехнический Университет Петра Великого\\
+		\large Институт компьютерных наук и технологий \\
+		\large Кафедра компьютерных систем и программных технологий\\[6cm]
+		% название института, затем отступ 6см
+		
+		\huge Программирование\\[0.5cm] % название работы, затем отступ 0,5см
+		\large Отчет по курсовой работе\\[0.1cm]
+		\large Игра "Побег из гробницы"\\[5cm]
+
+	\end{center}
 
 
+	\begin{flushright} % выравнивание по правому краю
+		\begin{minipage}{0.25\textwidth} % врезка в половину ширины текста
+			\begin{flushleft} % выровнять её содержимое по левому краю
+
+				\large\textbf{Работу выполнил:}\\
+				\large Бойцов К.С.\\
+				\large {Группа:} 23501/4\\
+				
+				\large \textbf{Преподаватель:}\\
+				\large Вылегжанина К.Д.
+				
+
+			\end{flushleft}
+		\end{minipage}
+	\end{flushright}
+	
+	\vfill % заполнить всё доступное ниже пространство
+
+	\begin{center}
+	\large Санкт-Петербург\\
+	\large \the\year % вывести дату
+	\end{center} % закончить выравнивание по центру
+
+\thispagestyle{empty} % не нумеровать страницу
+\end{titlepage} % конец титульной страницы
+
+\vfill % заполнить всё доступное ниже пространство
 % Содержание
 \tableofcontents
 \newpage
 
-
-
-\section{Игровое приложение: "Побег из гробницы"}
+\section{Игровое приложение: ''Побег из гробницы''}
 
 Главный герой игры - археолог - оказывается в одном помещении с ожившей мумией, желающей расправиться с незваным гостем.\\
 
 
 
-\subsection{Концепция игрового приложения "Побег из гробницы"}
+\subsection{Концепция игрового приложения ''Побег из гробницы''}
 
 Приложение являет собой логическую игру, в которой главному герою предстоит добраться до выхода из гробницы.\\
 
@@ -34,21 +106,21 @@
 
 \subsection{Вывод}
 
-Пояснён выбор темы курсового проекта. Описана концепция игры "Побег из гробницы". Определено задание.
+Пояснён выбор темы курсового проекта. Описана концепция игры ''Побег из гробницы''. Определено задание.
 
 %#######################################################################################################
 
-\section{Проектирование графического приложения, реализующего игру "Побег из гробницы"}
+\section{Проектирование графического приложения, реализующего игру ''Побег из гробницы''}
 
 \subsection{Проектирование библиотеки}
 
-Приложение должно позволять игроку играть в "Побег из гробницы"\\
+Приложение должно позволять игроку играть в ''Побег из гробницы''\\
 
 Библиотека - ядро приложения. Здесь содержатся основные классы, необ-
 ходимые для представления игры. Для создания графического приложения
 была выбрана библиотека LibGDX
 
-\section{Реализация игры "Побег из гробницы"}
+\section{Реализация игры ''Побег из гробницы''}
 
 \subsection{Среда разработки}
 
@@ -73,7 +145,7 @@
 Для создания графического приложения была выбрана библиотека Swing.\\
 
 
-На рисунке 1 представлен вариант игрового поля для игры "Побег из гробницы", где 0 - свободная клетка, 1 - преграда, 2 - выход:
+На рисунке 1 представлен вариант игрового поля для игры ''Побег из гробницы'', где 0 - свободная клетка, 1 - преграда, 2 - выход:
 
 \begin{figure}[H]
 	\begin{center}
@@ -135,7 +207,7 @@
 	\end{center}
 \end{figure}
 
-Таким образом разработано графическое приложение, позволяющее играть в "Побег из гробницы".\\
+Таким образом разработано графическое приложение, позволяющее играть в ''Побег из гробницы''.\\
 
 \subsection{Вывод}
 
@@ -147,8 +219,8 @@
 
 \section{Вывод}
 
-В результате работы было разработано игровое приложение "Побег из гробницы". Посредством библиотеки Swing было создано приложение, предоставляющее пользователю функциональность
-ядра и позволяющее играть в игру ”Побег из гробницы”.
+В результате работы было разработано игровое приложение ''Побег из гробницы''. Посредством библиотеки Swing было создано приложение, предоставляющее пользователю функциональность
+ядра и позволяющее играть в игру ''Побег из гробницы''.
 
 
 
