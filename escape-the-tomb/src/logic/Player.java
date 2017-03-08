@@ -62,4 +62,5 @@ public class Player extends Sprite {
     public void moveY(int y1) {
         y += y1;
     }
+
 }

@@ -1,5 +1,6 @@
 package logic;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -23,8 +24,8 @@ public class Field {
     public Field (String path) {
         try {
             Scanner sc = new Scanner(new File(path));
-            for (int i = 0; i<10; i++) {
-                for (int j = 0; j<10; j++) {
+            for (int j = 0; j<10; j++) {
+                for (int i = 0; i<10; i++) {
                     field[i][j] = sc.nextInt();
 
                     if (field[i][j] == 0) {
@@ -48,6 +49,25 @@ public class Field {
     }
 
     public boolean ifPossibleToMove(int x,int y) {
-        return (!cells[x][x].getIsBlocked());
+        return (!cells[x][y].getIsBlocked());
     }
+
+//    public void drawBoard(Graphics g) {
+//        for (int j = 0; j < 500; j+=50) {
+//            for (int i = 0; i < 500; i+=50) {
+//                if (field[i/50][j/50]==0) {
+//                    g.setColor(Color.WHITE);
+//                    g.fillRect(50,50,500,500);
+//                }
+//                if (field[i/50][j/50]==1) {
+//                    g.setColor(Color.BLACK);
+//                    g.fillRect(50,50,500,500);
+//                }
+//                if (field[i/50][j/50]==2) {
+//                    g.setColor(Color.YELLOW);
+//                    g.fillRect(50,50,500,500);
+//                }
+//            }
+//        }
+//    }
 }

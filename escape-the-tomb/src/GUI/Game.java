@@ -35,13 +35,13 @@ public class Game extends JPanel implements Runnable {
     private int x = 0;
     private int y = 0;
     private int mobX = 450;
-    private int mobY = 300;
+    private int mobY = 100;
 
-    ImageIcon ii = new ImageIcon("assets/man.png");
+    ImageIcon ii = new ImageIcon("assets/hero.png");
     private Image image = ii.getImage();
 
-    private Player hero = new Player(x,y,"assets/man.png");
-    private Player mob = new Player(mobX,mobY,"assets/mummy.png");
+    public Player hero = new Player(x,y,"assets/hero.png");
+    public Player mob = new Player(mobX,mobY,"assets/mummy.png");
 
     String path = "src/maps/map.txt";
     Field playfield = new Field(path);
@@ -71,64 +71,28 @@ public class Game extends JPanel implements Runnable {
 
     public void update(){
         if (leftPressed && playfield.ifPossibleToMove((hero.getX()-50)/50,hero.getY()/50)) {
+            isGameOver();
             hero.moveX(-50);
-            if ((hero.getX()<mob.getX() && hero.getY()<mob.getY() && (mob.getX()-hero.getX())>(mob.getY()-hero.getY())) || (hero.getX()<mob.getX() && mob.getY()==hero.getY()) || (hero.getX()<mob.getX() && hero.getY()>mob.getY() && (mob.getX()-hero.getX())>(hero.getY()-mob.getY()))) {
-                mob.moveX(-50);
-            }
-            if ((hero.getX()>mob.getX() && hero.getY()<mob.getY() && (hero.getX()-mob.getX())>(mob.getY()-hero.getY())) || (hero.getX()>mob.getX() && hero.getY()==mob.getY()) || (hero.getX()>mob.getX() && hero.getY()>mob.getY() && (hero.getX()-mob.getX())>(hero.getY()-mob.getY()))) {
-                mob.moveX(50);
-            }
-            if ((hero.getX()<mob.getX() && hero.getY()<mob.getY() && (mob.getX()-hero.getX())<(mob.getY()-hero.getY())) || (hero.getX()==mob.getX() && mob.getY()>hero.getY()) || (hero.getX()>mob.getX() && hero.getY()<mob.getY() && (hero.getX()-mob.getX())<(mob.getY()-hero.getY()))) {
-                mob.moveY(-50);
-            }
-            if ((hero.getX()<mob.getX() && hero.getY()>mob.getY() && (mob.getX()-hero.getX())>(hero.getY()-mob.getY())) || (hero.getX()==mob.getX() && mob.getY()<hero.getY()) || (hero.getX()>mob.getX() && hero.getY()>mob.getY() && (hero.getX()-mob.getX())<(hero.getY()-mob.getY()))) {
-                mob.moveY(50);
-            }
+            isWin();
+            moveForMob();
         }
         if (rightPressed && playfield.ifPossibleToMove((hero.getX()+50)/50,hero.getY()/50)) {
+            isGameOver();
             hero.moveX(50);
-            if ((hero.getX()<mob.getX() && hero.getY()<mob.getY() && (mob.getX()-hero.getX())>(mob.getY()-hero.getY())) || (hero.getX()<mob.getX() && mob.getY()==hero.getY()) || (hero.getX()<mob.getX() && hero.getY()>mob.getY() && (mob.getX()-hero.getX())>(hero.getY()-mob.getY()))) {
-                mob.moveX(-50);
-            }
-            if ((hero.getX()>mob.getX() && hero.getY()<mob.getY() && (hero.getX()-mob.getX())>(mob.getY()-hero.getY())) || (hero.getX()>mob.getX() && hero.getY()==mob.getY()) || (hero.getX()>mob.getX() && hero.getY()>mob.getY() && (hero.getX()-mob.getX())>(hero.getY()-mob.getY()))) {
-                mob.moveX(50);
-            }
-            if ((hero.getX()<mob.getX() && hero.getY()<mob.getY() && (mob.getX()-hero.getX())<(mob.getY()-hero.getY())) || (hero.getX()==mob.getX() && mob.getY()>hero.getY()) || (hero.getX()>mob.getX() && hero.getY()<mob.getY() && (hero.getX()-mob.getX())<(mob.getY()-hero.getY()))) {
-                mob.moveY(-50);
-            }
-            if ((hero.getX()<mob.getX() && hero.getY()>mob.getY() && (mob.getX()-hero.getX())>(hero.getY()-mob.getY())) || (hero.getX()==mob.getX() && mob.getY()<hero.getY()) || (hero.getX()>mob.getX() && hero.getY()>mob.getY() && (hero.getX()-mob.getX())<(hero.getY()-mob.getY()))) {
-                mob.moveY(50);
-            }
+            isWin();
+            moveForMob();
         }
         if (downPressed && playfield.ifPossibleToMove(hero.getX()/50,(hero.getY()+50)/50)) {
+            isGameOver();
             hero.moveY(50);
-            if ((hero.getX()<mob.getX() && hero.getY()<mob.getY() && (mob.getX()-hero.getX())>(mob.getY()-hero.getY())) || (hero.getX()<mob.getX() && mob.getY()==hero.getY()) || (hero.getX()<mob.getX() && hero.getY()>mob.getY() && (mob.getX()-hero.getX())>(hero.getY()-mob.getY()))) {
-                mob.moveX(-50);
-            }
-            if ((hero.getX()>mob.getX() && hero.getY()<mob.getY() && (hero.getX()-mob.getX())>(mob.getY()-hero.getY())) || (hero.getX()>mob.getX() && hero.getY()==mob.getY()) || (hero.getX()>mob.getX() && hero.getY()>mob.getY() && (hero.getX()-mob.getX())>(hero.getY()-mob.getY()))) {
-                mob.moveX(50);
-            }
-            if ((hero.getX()<mob.getX() && hero.getY()<mob.getY() && (mob.getX()-hero.getX())<(mob.getY()-hero.getY())) || (hero.getX()==mob.getX() && mob.getY()>hero.getY()) || (hero.getX()>mob.getX() && hero.getY()<mob.getY() && (hero.getX()-mob.getX())<(mob.getY()-hero.getY()))) {
-                mob.moveY(-50);
-            }
-            if ((hero.getX()<mob.getX() && hero.getY()>mob.getY() && (mob.getX()-hero.getX())>(hero.getY()-mob.getY())) || (hero.getX()==mob.getX() && mob.getY()<hero.getY()) || (hero.getX()>mob.getX() && hero.getY()>mob.getY() && (hero.getX()-mob.getX())<(hero.getY()-mob.getY()))) {
-                mob.moveY(50);
-            }
+            isWin();
+            moveForMob();
         }
         if (upPressed && playfield.ifPossibleToMove(hero.getX()/50,(hero.getY()-50)/50)) {
+            isGameOver();
             hero.moveY(-50);
-            if ((hero.getX()<mob.getX() && hero.getY()<mob.getY() && (mob.getX()-hero.getX())>(mob.getY()-hero.getY())) || (hero.getX()<mob.getX() && mob.getY()==hero.getY()) || (hero.getX()<mob.getX() && hero.getY()>mob.getY() && (mob.getX()-hero.getX())>(hero.getY()-mob.getY()))) {
-                mob.moveX(-50);
-            }
-            if ((hero.getX()>mob.getX() && hero.getY()<mob.getY() && (hero.getX()-mob.getX())>(mob.getY()-hero.getY())) || (hero.getX()>mob.getX() && hero.getY()==mob.getY()) || (hero.getX()>mob.getX() && hero.getY()>mob.getY() && (hero.getX()-mob.getX())>(hero.getY()-mob.getY()))) {
-                mob.moveX(50);
-            }
-            if ((hero.getX()<mob.getX() && hero.getY()<mob.getY() && (mob.getX()-hero.getX())<(mob.getY()-hero.getY())) || (hero.getX()==mob.getX() && mob.getY()>hero.getY()) || (hero.getX()>mob.getX() && hero.getY()<mob.getY() && (hero.getX()-mob.getX())<(mob.getY()-hero.getY()))) {
-                mob.moveY(-50);
-            }
-            if ((hero.getX()<mob.getX() && hero.getY()>mob.getY() && (mob.getX()-hero.getX())>(hero.getY()-mob.getY())) || (hero.getX()==mob.getX() && mob.getY()<hero.getY()) || (hero.getX()>mob.getX() && hero.getY()>mob.getY() && (hero.getX()-mob.getX())<(hero.getY()-mob.getY()))) {
-                mob.moveY(50);
-            }
+            isWin();
+            moveForMob();
         }
 
         repaint();
@@ -139,7 +103,7 @@ public class Game extends JPanel implements Runnable {
         addKeyListener(keyListener);
 //        addKeyListener(new TAdapter());
 
-        setBackground(Color.BLACK);
+        setBackground(Color.WHITE);
     }
 
 //    public void render(){
@@ -159,9 +123,10 @@ public class Game extends JPanel implements Runnable {
 //        bs.show();
 //    }
 
+    Graphics g;
     public void start(){
         running = true;
-//        drawBoard();
+//        playfield.drawBoard(g);
         new Thread(this).start();
     }
 
@@ -174,6 +139,9 @@ public class Game extends JPanel implements Runnable {
         if (running) {
 
             drawObjects(g);
+            if (hero.getX()==0 && hero.getY()==450) {
+                drawCongratulations(g);
+            }
 
         } else {
 
@@ -203,14 +171,22 @@ public class Game extends JPanel implements Runnable {
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics fm = getFontMetrics(small);
 
+        g.setColor(Color.black);
+        g.setFont(small);
+        g.drawString(msg, (WIDTH - fm.stringWidth(msg)) / 2, HEIGHT / 2);
+    }
+    private void drawCongratulations(Graphics g) {
+
+        String msg = "You won!";
+        Font small = new Font("Helvetica", Font.BOLD, 14);
+        FontMetrics fm = getFontMetrics(small);
+
         g.setColor(Color.white);
         g.setFont(small);
         g.drawString(msg, (WIDTH - fm.stringWidth(msg)) / 2, HEIGHT / 2);
     }
 
-    private void drawBoard() {
 
-    }
 
     public static void main(String[] args) {
         Game game = new Game();
@@ -238,7 +214,6 @@ public class Game extends JPanel implements Runnable {
             }
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 rightPressed = true;
-                System.out.println("tak tak");
             }
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 downPressed = true;
@@ -263,4 +238,48 @@ public class Game extends JPanel implements Runnable {
             }
         }
     };
+
+    private void isGameOver() {
+        if (hero.getX()==mob.getX() && hero.getY()==mob.getY()) {
+            running = false;
+        }
+    }
+
+    private void isWin() {
+        if (hero.getX()==0 && hero.getY()==450) {
+            running = false;
+        }
+    }
+
+    public void moveForMob() {
+        if (((hero.getX()<mob.getX() && hero.getY()<mob.getY() && (mob.getX()-hero.getX())>(mob.getY()-hero.getY())) || (hero.getX()<mob.getX() && mob.getY()==hero.getY()) || (hero.getX()<mob.getX() && hero.getY()>mob.getY() && (mob.getX()-hero.getX())>(hero.getY()-mob.getY())) && playfield.ifPossibleToMove((mob.getX()-50)/50,mob.getY()/50))) {
+            mob.moveX(-50);
+        }
+        if (((hero.getX()>mob.getX() && hero.getY()<mob.getY() && (hero.getX()-mob.getX())>(mob.getY()-hero.getY())) || (hero.getX()>mob.getX() && hero.getY()==mob.getY()) || (hero.getX()>mob.getX() && hero.getY()>mob.getY() && (hero.getX()-mob.getX())>(hero.getY()-mob.getY()))) && playfield.ifPossibleToMove((mob.getX()+50)/50,mob.getY()/50)) {
+            mob.moveX(50);
+        }
+        if (((hero.getX()<mob.getX() && hero.getY()<mob.getY() && (mob.getX()-hero.getX())<(mob.getY()-hero.getY())) || (hero.getX()==mob.getX() && mob.getY()>hero.getY()) || (hero.getX()>mob.getX() && hero.getY()<mob.getY() && (hero.getX()-mob.getX())<(mob.getY()-hero.getY()))) && playfield.ifPossibleToMove(mob.getX()/50,(mob.getY()-50)/50)) {
+            mob.moveY(-50);
+        }
+        if (((hero.getX()<mob.getX() && hero.getY()>mob.getY() && (mob.getX()-hero.getX())<(hero.getY()-mob.getY())) || (hero.getX()==mob.getX() && mob.getY()<hero.getY()) || (hero.getX()>mob.getX() && hero.getY()>mob.getY() && (hero.getX()-mob.getX())<(hero.getY()-mob.getY()))) && playfield.ifPossibleToMove(mob.getX()/50,(mob.getY()+50)/50)) {
+            mob.moveY(50);
+        }
+
+        if ((hero.getX()<mob.getX() && hero.getY()<mob.getY() && (mob.getX()-hero.getX())==(mob.getY()-hero.getY())) && playfield.ifPossibleToMove((mob.getX()-50)/50,(mob.getY()-50)/50)) {
+            mob.moveX(-50);
+            mob.moveY(-50);
+        }
+        if ((hero.getX()>mob.getX() && hero.getY()<mob.getY() && (hero.getX()-mob.getX())==(mob.getY()-hero.getY())) && playfield.ifPossibleToMove((mob.getX()+50)/50,(mob.getY()-50)/50)) {
+            mob.moveX(50);
+            mob.moveY(-50);
+        }
+        if ((hero.getX()<mob.getX() && hero.getY()>mob.getY() && (mob.getX()-hero.getX())==(hero.getY()-mob.getY())) && playfield.ifPossibleToMove((mob.getX()-50)/50,(mob.getY()+50)/50)) {
+            mob.moveX(-50);
+            mob.moveY(50);
+        }
+        if ((hero.getX()>mob.getX() && hero.getY()>mob.getY() && (hero.getX()-mob.getX())==(hero.getY()-mob.getY())) && playfield.ifPossibleToMove((mob.getX()+50)/50,(mob.getY()+50)/50)) {
+            mob.moveX(50);
+            mob.moveY(50);
+        }
+    }
 }
