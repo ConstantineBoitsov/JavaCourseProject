@@ -126,6 +126,7 @@ public class Game extends JPanel implements Runnable {
     Graphics g;
     public void start(){
         running = true;
+//        drawDoor(g);
 //        playfield.drawBoard(g);
         new Thread(this).start();
     }
@@ -139,9 +140,7 @@ public class Game extends JPanel implements Runnable {
         if (running) {
 
             drawObjects(g);
-            if (hero.getX()==0 && hero.getY()==450) {
-                drawCongratulations(g);
-            }
+
 
         } else {
 
@@ -186,6 +185,10 @@ public class Game extends JPanel implements Runnable {
         g.drawString(msg, (WIDTH - fm.stringWidth(msg)) / 2, HEIGHT / 2);
     }
 
+    private void drawDoor(Graphics gr) {
+        gr.setColor(Color.CYAN);
+        gr.fillRect(0,450,50,50);
+    }
 
 
     public static void main(String[] args) {

@@ -57,15 +57,15 @@ public class Field {
 //            for (int i = 0; i < 500; i+=50) {
 //                if (field[i/50][j/50]==0) {
 //                    g.setColor(Color.WHITE);
-//                    g.fillRect(50,50,500,500);
+//                    g.fillRect(50,50,50,50);
 //                }
 //                if (field[i/50][j/50]==1) {
 //                    g.setColor(Color.BLACK);
-//                    g.fillRect(50,50,500,500);
+//                    g.fillRect(50,50,50,50);
 //                }
 //                if (field[i/50][j/50]==2) {
 //                    g.setColor(Color.YELLOW);
-//                    g.fillRect(50,50,500,500);
+//                    g.fillRect(50,50,50,50);
 //                }
 //            }
 //        }
